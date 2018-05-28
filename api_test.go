@@ -58,6 +58,14 @@ func TestCreateImage(t *testing.T){
    if actual == false{
       t.Errorf("Error! Expected : %v , got : %v" , expected , actual)
    }
+   
+   req = httptest.NewRequest(http.MethodGet, "/?name=test.jpeg&length=sdf&breadth=34fff",nil)
+   http.DefaultServeMux.ServeHTTP(rw,req)
+   expected_message := "Fatal error in atoi"
+   actual_message := strings.Contains(rw.Body.String(),"Fatal error in atoi")
+   if actual == false {
+      t.Errorf("Error! Expected : %v , got : %v",actual_message,expected_message)
+   }
 }
 
 
