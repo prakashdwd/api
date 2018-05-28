@@ -48,7 +48,7 @@ func TestParamters(t *testing.T) {
 }
 
 func TestCreateImage(t *testing.T){
-   req := httptest.NewRequest(http.MethodGet , "/?name=test.jpeg&length=50&breadth=50",nil)
+   req := httptest.NewRequest(http.MethodGet , "/?name=test.jpeg&length=&breadth=",nil)
    rw := httptest.NewRecorder()
    http.DefaultServeMux.ServeHTTP(rw,req)
    expected := true

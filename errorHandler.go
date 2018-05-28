@@ -5,7 +5,7 @@ import (
 	"html/template"
 )
 
-var ErrorTemplate string = `<!DOCTYPE html><html lang="en"><head><{{.Message}}></head><body></body>`
+var ErrorTemplate string = `<!DOCTYPE html><html lang="en"><head>{{.Message}}</head><body></body>`
 
 func ErrorHandler (w http.ResponseWriter , message string) {
     if new_template, err := template.New("text").Parse(ErrorTemplate); err != nil {

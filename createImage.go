@@ -10,7 +10,6 @@ func CreateImage(w http.ResponseWriter , name , length , breadth , format string
    imagick.Initialize()
    image_length, err1 := strconv.Atoi(length)
    image_breadth, err2 := strconv.Atoi(breadth)
-
    
    if err1 != nil {
       ErrorHandler(w , "Fatal error in atoi")
