@@ -30,18 +30,23 @@ func TestParamters(t *testing.T) {
     if actual == false {
         t.Errorf("handler returned unexpected body: got %v want %v", actual, expected)
     }
- }
-
-func TestParams(t *testing.T){
-    req := httptest.NewRequest(http.MethodGet, "/?",nil)
-    rw := httptest.NewRecorder()
+ 
+    req = httptest.NewRequest(http.MethodGet, "/?",nil)
     http.DefaultServeMux.ServeHTTP(rw,req)
-    expected := "Invalid name"
-    actual := strings.Contains(rw.Body.String(),"Invalid name")
+    expected = "Invalid name"
+    actual = strings.Contains(rw.Body.String(),"Invalid name")
     if actual == false {
-       t.Errorf("Error")
+       t.Errorf("Error! Expected : %v , got : %v",actual,expected)
     }
-    fmt.Println(expected)
+    
+    req = httptest.NewRequest(http.MethodGet , "/?name=tes.png&length=89&breadth=100",nil)
+    http.DefaultServeMux.ServeHTTP(rw,req)
+    expected = "No such image"
+    actual = strings.Contains(rw.Body.String(),"No such image")
+    if actual == false{
+      t.Errorf("Error! Expected : %v , got : %v", actual , expected)
+    }
+    fmt.Println(rw.Body)
 }
 
 
