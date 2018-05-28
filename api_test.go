@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"strings"
-   "fmt"
 )
 
 func init(){
@@ -46,7 +45,6 @@ func TestParamters(t *testing.T) {
     if actual == false{
       t.Errorf("Error! Expected : %v , got : %v", actual , expected)
     }
-    fmt.Println(rw.Body)
 }
 
 func TestCreateImage(t *testing.T){
@@ -72,10 +70,10 @@ func TestWriteImageWithTemplate (t *testing.T) {
      req := httptest.NewRequest(http.MethodGet, "/?name=test.jpeg&length=100&breadth=100",nil)
      rw := httptest.NewRecorder()
      http.DefaultServeMux.ServeHTTP(rw,req)
-     expected := "image" 
-     actual := rw.Header().Get("Content-type")
-     if strings.Compare(actual,expected) != 0 {
-         t.Errorf("Error! Expected : % , got : %v" , expected , actual)
+     expected := "data:image/jpg;base64" 
+     actual := strings.Contains(rw.Body.String(),expected)
+     if actual == false {
+         t.Errorf("Error! Expected : %v , got : %v" , expected , actual)
      }
 }
 
