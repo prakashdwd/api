@@ -48,7 +48,7 @@ func TestParamters(t *testing.T) {
 }
 
 func TestCreateImage(t *testing.T){
-   req := httptest.NewRequest(http.MethodGet , "/?name=test.jpeg&length=100&breadth=100",nil)
+   req := httptest.NewRequest(http.MethodGet , "/?name=test.jpeg&length=50&breadth=50",nil)
    rw := httptest.NewRecorder()
    http.DefaultServeMux.ServeHTTP(rw,req)
    expected := true
@@ -73,8 +73,19 @@ func TestWriteImageWithTemplate (t *testing.T) {
      expected := "data:image/jpg;base64" 
      actual := strings.Contains(rw.Body.String(),expected)
      if actual == false {
-         t.Errorf("Error! Expected : %v , got : %v" , expected , actual)
+         t.Errorf("Error! Expected : true , got : %v", actual)
      }
+}
+
+func TestForPNG (t *testing.T) {
+     req := httptest.NewRequest(http.MethodGet, "/?name=test.png&length=100&breadth=100",nil)
+     rw := httptest.NewRecorder()
+     http.DefaultServeMux.ServeHTTP(rw,req)
+     expected := "data:image/jpg;base64"
+     actual := strings.Contains(rw.Body.String(),expected)
+     if actual == false{
+       t.Errorf("Error! Expected : %v , got : %v", actual , expected)
+    }
 }
 
 
