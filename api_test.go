@@ -68,6 +68,15 @@ func TestCreateImage(t *testing.T){
    }
 }
 
-
+func TestWriteImageWithTemplate (t *testing.T) {
+     req := httptest.NewRequest(http.MethodGet, "/?name=test.jpeg&length=100&breadth=100",nil)
+     rw := httptest.NewRecorder()
+     http.DefaultServeMux.ServeHTTP(rw,req)
+     expected := "image" 
+     actual := rw.Header().Get("Content-type")
+     if strings.Compare(actual,expected) != 0 {
+         t.Errorf("Error! Expected : % , got : %v" , expected , actual)
+     }
+}
 
 

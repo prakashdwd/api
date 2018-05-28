@@ -54,6 +54,20 @@ func showImage(w http.ResponseWriter, r *http.Request){
          }
      }
 
+     file , err := os.Open(path)
+   if err != nil {
+      ErrorHandler(w,"Cannot open requested image!")
+      return
+   }
+
+   img,_ , err1 := image.Decode(file)
+	if err1 != nil {
+		ErrorHandler(w,"Error decoding image!")
+		return
+	}
+
+   WriteImageWithTemplate(w, &img , format)
+
 }
 
 
