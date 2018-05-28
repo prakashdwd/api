@@ -49,4 +49,17 @@ func TestParamters(t *testing.T) {
     fmt.Println(rw.Body)
 }
 
+func TestCreateImage(t *testing.T){
+   req := httptest.NewRequest(http.MethodGet , "/?name=test.jpeg&length=100&breadth=100",nil)
+   rw := httptest.NewRecorder()
+   http.DefaultServeMux.ServeHTTP(rw,req)
+   expected := true
+   actual := Exists("images/test_100_100.jpeg")
+   if actual == false{
+      t.Errorf("Error! Expected : %v , got : %v" , expected , actual)
+   }
+}
+
+
+
 

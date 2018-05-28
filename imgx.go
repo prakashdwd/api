@@ -3,7 +3,7 @@ import (
   "log"
   "net/http"
   "strings"
-  "fmt"
+
   "os"
 )
 
@@ -36,10 +36,8 @@ func showImage(w http.ResponseWriter, r *http.Request){
         format = ".png"
         }else{
           ErrorHandler(w,"Invalid Extension")
-          fmt.Println("herer-31")
           return
         }
-      fmt.Println(format);
      }
      file_name_length := strings.Index(name[0],".") 
      file_name := string(name[0][:file_name_length])
@@ -55,6 +53,7 @@ func showImage(w http.ResponseWriter, r *http.Request){
             CreateImage(w , file_name , length[0] , breadth[0] , format)
          }
      }
+
 }
 
 
